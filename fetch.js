@@ -459,9 +459,5 @@
     })
   }
 
-  if (typeof window === 'undefined') {
-    module.exports = fetch
-  } else {
-    self.fetch = fetch
-  }
+  self.fetch = fetch
 })(typeof self !== 'undefined' ? self : this);
