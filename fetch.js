@@ -414,8 +414,8 @@
   self.Headers = Headers
   self.Request = Request
   self.Response = Response
-
-  self.fetch = function(input, init) {
+  
+  function fetch(input, init) {
     return new Promise(function(resolve, reject) {
       var request = new Request(input, init)
       var xhr = new XMLHttpRequest()
@@ -458,5 +458,10 @@
       xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
     })
   }
-  self.fetch.polyfill = true
+
+  if (typeof window === 'undefined') {
+    module.exports = fetch
+  } else {
+    self.fetch = fetch
+  }
 })(typeof self !== 'undefined' ? self : this);
